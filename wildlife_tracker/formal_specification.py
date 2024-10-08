@@ -15,6 +15,7 @@ animal_id: int
 animals: dict[int, Animal] = {}
 #habitat
 animals: List[int] = []
+#migration management
 current_date: str
 #animal
 current_location: str
@@ -48,9 +49,11 @@ size: int
 species: str
 #path
 species: str
+#migration
 start_date: str
 #path
 start_location: Habitat
+#migration
 status: str = "Scheduled"
 
 #habitat
@@ -59,7 +62,7 @@ def assign_animals_to_habitat(animals: List[Animal]) -> None:
 #habitat_manager
 def assign_animals_to_habitat(habitat_id: int, animals: List[Animal]) -> None:
     pass
-
+#migration manager
 def cancel_migration(migration_id: int) -> None:
     pass
 #habitat manager
@@ -101,34 +104,42 @@ def get_migration_details(migration_id: int) -> dict[str, Any]:
 #migration manager
 def get_migration_path_by_id(path_id: int) -> MigrationPath:
     pass
-#
+#migration manager
 def get_migration_paths() -> list[MigrationPath]:
     pass
 
+#migration manager
 def get_migration_paths_by_destination(destination: Habitat) -> list[MigrationPath]:
     pass
 
+#migration manager
 def get_migration_paths_by_species(species: str) -> list[MigrationPath]:
     pass
 
+#migration manager
 def get_migration_paths_by_start_location(start_location: Habitat) -> list[MigrationPath]:
     pass
 
+#migration manager
 def get_migrations() -> list[Migration]:
     pass
 
+#migration manager
 def get_migrations_by_current_location(current_location: str) -> list[Migration]:
     pass
 
+#migration manager
 def get_migrations_by_migration_path(migration_path_id: int) -> list[Migration]:
     pass
 
+#migration manager
 def get_migrations_by_start_date(start_date: str) -> list[Migration]:
     pass
 
+#migration manager
 def get_migrations_by_status(status: str) -> list[Migration]:
     pass
-
+#migration path
 def get_migration_path_details(path_id) -> dict:
     pass
 #animal manager
@@ -140,10 +151,10 @@ def remove_animal(animal_id: int) -> None:
 #habitat manager
 def remove_habitat(habitat_id: int) -> None:
     pass
-
+#migration manager
 def remove_migration_path(path_id: int) -> None:
     pass
-
+#migration manager
 def schedule_migration(migration_path: MigrationPath) -> None:
     pass
 #animal
@@ -152,9 +163,9 @@ def update_animal_details(animal_id: int, **kwargs: Any) -> None:
 #habitat
 def update_habitat_details(habitat_id: int, **kwargs: dict[str, Any]) -> None:
     pass
-
+#migration
 def update_migration_details(migration_id: int, **kwargs: Any) -> None:
     pass
-
+#migration path
 def update_migration_path_details(path_id: int, **kwargs) -> None:
     pass
