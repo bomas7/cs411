@@ -13,7 +13,9 @@ class MigrationPath:
         self.start_location = start_location
         self.destination = destination
         self.duration = duration
+
     def get_migration_path_details(path_id) -> dict:
         pass
+
     def update_migration_path_details(path_id: int, **kwargs) -> None:
         pass

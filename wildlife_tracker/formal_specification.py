@@ -17,7 +17,7 @@ animals: dict[int, Animal] = {}
 animals: List[int] = []
 #migration management
 current_date: str
-#animal
+#migration
 current_location: str
 #path
 destination: Habitat
