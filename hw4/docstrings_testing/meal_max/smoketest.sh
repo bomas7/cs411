@@ -82,6 +82,7 @@ get_leaderboard() {
   response=$(curl -s -X GET "$BASE_URL/leaderboard")
   if echo "$response" | grep -q '"status": "success"'; then
     echo "Leaderboard retrieved successfully."
+    echo $response
   else
     echo "Failed to get the leaderboard."
     echo "$response"
@@ -109,7 +110,7 @@ prep_combatant() {
 # Function to start a battle
 battle() {
   echo "Starting battle..."
-  response=$(curl -s -X POST "$BASE_URL/battle")
+  response=$(curl -s -X GET "$BASE_URL/battle")
   if echo "$response" | grep -q '"status": "success"'; then
     echo "Battle executed successfully."
   else
@@ -126,7 +127,13 @@ clear_meals() {
 
 clear_combatants() {
   echo "Clearing the combatants..."
-  curl -s -X DELETE "$BASE_URL/clear-combatants" | grep -q '"status": "success"'
+  response=$(curl -s -X POST "$BASE_URL/clear-combatants")
+  if echo "$response" | grep -q '"status": "success"'; then
+    echo "Combatants cleared successfully."
+  else
+    echo "Failed to clear combatants."
+    exit 1
+  fi
 }
   
 get_combatants() {
@@ -134,6 +141,7 @@ get_combatants() {
   response=$(curl -s -X GET "$BASE_URL/get-combatants")
   if echo "$response" | grep -q '"status": "success"'; then
     echo "Combatants retrieved successfully"
+    echo $response
   else
     echo "Failed to retrieve combatants"
     echo "$response"
@@ -174,9 +182,10 @@ create_meal "SpecialSpaghetti" "Italian" 10.5 "MED"
 create_meal "SpecialTacos" "Mexican" 8.0 "LOW"
 create_meal "SpecialSushi" "Japanese" 15.0 "HIGH"
 
-prep_combatant "SpecialSpaghetti"
 clear_combatants
+prep_combatant "SpecialSpaghetti"
 get_combatants 
+get_leaderboard
 
 prep_combatant "SpecialSpaghetti"
 get_combatants
@@ -185,7 +194,7 @@ battle
 
 get_leaderboard
 
-prep_combatant "Special Sushi"
+prep_combatant "SpecialSushi"
 battle
 get_leaderboard
 clear_meals
