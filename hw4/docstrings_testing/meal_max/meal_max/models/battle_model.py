@@ -11,11 +11,32 @@ configure_logger(logger)
 
 
 class BattleModel:
+    """A class representing a meal battle.
+
+    Attributes:
+        combatatants (List[Meal]): A list containing meals that represent combatants
+
+    """
 
     def __init__(self):
+        """
+
+        Initialize combatants list.
+
+        """
         self.combatants: List[Meal] = []
 
     def battle(self) -> str:
+        """Simulates a battle between two combatants and removes loser from combatant list.
+
+        Returns: 
+            str: the name of the winning meal
+
+        Raises:
+            ValueError: If length of combatants is less than two
+
+        """
+
         logger.info("Two meals enter, one meal leaves!")
 
         if len(self.combatants) < 2:
@@ -69,10 +90,17 @@ class BattleModel:
         return winner.meal
 
     def clear_combatants(self):
+        """Clears the combatants list"""
+
         logger.info("Clearing the combatants list.")
         self.combatants.clear()
 
     def get_battle_score(self, combatant: Meal) -> float:
+        """Returns the associated battlescore with a meal.
+
+        Args:
+            combatant (Meal): The meal we want the associated battle score of.
+        """
         difficulty_modifier = {"HIGH": 1, "MED": 2, "LOW": 3}
 
         # Log the calculation process
@@ -88,6 +116,12 @@ class BattleModel:
         return score
 
     def get_combatants(self) -> List[Meal]:
+        """Retrieves combatatants list 
+
+        Returns:
+            List[Meal]: a list of combatants
+
+        """
         logger.info("Retrieving current list of combatants.")
         return self.combatants
 
