@@ -20,7 +20,7 @@ class BattleModel:
     """
 
     def __init__(self):
-        """Initialize combatants list."""
+        """Initialize combatants to an empty list"""
 
         self.combatants: List[Meal] = []
 
@@ -89,8 +89,7 @@ class BattleModel:
         return winner.meal
 
     def clear_combatants(self):
-        """
-        Clears the combatants list"""
+        """Clears the combatants list"""
 
         logger.info("Clearing the combatants list.")
         self.combatants.clear()
