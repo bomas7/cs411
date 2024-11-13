@@ -50,7 +50,6 @@ create_meal() {
 # Function to delete a meal by ID
 delete_meal_by_id() {
   meal_id=$1
-
   echo "Deleting meal by ID ($meal_id)..."
   response=$(curl -s -X DELETE "$BASE_URL/delete-meal/$meal_id")
   if echo "$response" | grep -q '"status": "success"'; then
@@ -67,7 +66,7 @@ get_meal_by_id() {
   meal_id=$1
 
   echo "Retrieving meal by ID ($meal_id)..."
-  response=$(curl -s -X GET "$BASE_URL/get-meal/$meal_id")
+  response=$(curl -s -X GET "$BASE_URL/get-meal-by-id/$meal_id")
   if echo "$response" | grep -q '"status": "success"'; then
     echo "Meal retrieved successfully by ID ($meal_id)."
   else
@@ -92,15 +91,16 @@ get_leaderboard() {
 
 # Function to prepare a combatant for a battle
 prep_combatant() {
-  meal_id=$1
+  meal_name=$1
 
-  echo "Preparing meal with ID $meal_id for battle..."
+  echo "Preparing meal with name $meal_name for battle..."
   response=$(curl -s -X POST "$BASE_URL/prep-combatant" -H "Content-Type: application/json" \
-    -d "{\"meal_id\":$meal_id}")
+    -d "{\"meal\":\"$meal_name\"}")
+  
   if echo "$response" | grep -q '"status": "success"'; then
-    echo "Meal with ID $meal_id prepared for battle."
+    echo "Meal with name $meal_name prepared for battle."
   else
-    echo "Failed to prepare meal with ID $meal_id for battle."
+    echo "Failed to prepare meal with name $meal_name for battle."
     echo "$response"
     exit 1
   fi
@@ -158,31 +158,34 @@ get_meal_by_name() {
 check_health
 check_db
 
-create_meal "Spaghetti" "Italian" 10.5 "MED"
 clear_meals
-create_meal "Spaghetti" "Italian" 10.5 "MED"
-delete_meal_by_id 1
+
 create_meal "Spaghetti" "Italian" 10.5 "MED"
 get_meal_by_id 1
 get_meal_by_name "Spaghetti"
+delete_meal_by_id 1
+
 create_meal "Tacos" "Mexican" 8.0 "LOW"
 get_meal_by_id 2
 get_meal_by_name "Tacos"
-create_meal "Sushi" "Japanese" 15.0 "HIGH"
-get_meal_by_name "Sushi"
+delete_meal_by_id 2
 
-prep_combatant 1
+create_meal "SpecialSpaghetti" "Italian" 10.5 "MED"
+create_meal "SpecialTacos" "Mexican" 8.0 "LOW"
+create_meal "SpecialSushi" "Japanese" 15.0 "HIGH"
+
+prep_combatant "SpecialSpaghetti"
 clear_combatants
-prep_combatant 1
-prep_combatant 2
+get_combatants 
+
+prep_combatant "SpecialSpaghetti"
+get_combatants
 
 battle  
 
 get_leaderboard
 
-delete_meal_by_id 1
-
-prep_combatant 3
+prep_combatant "Special Sushi"
 battle
 get_leaderboard
 clear_meals
