@@ -89,13 +89,15 @@ class BattleModel:
         return winner.meal
 
     def clear_combatants(self):
-        """Clears the combatants list"""
+        """
+        Clears the combatants list"""
 
         logger.info("Clearing the combatants list.")
         self.combatants.clear()
 
     def get_battle_score(self, combatant: Meal) -> float:
-        """Returns the associated battlescore with a meal.
+        """
+        Returns the associated battlescore with a meal.
 
         Args:
             combatant (Meal): The meal we want the associated battle score of.
