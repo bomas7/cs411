@@ -14,7 +14,8 @@ configure_logger(logger)
 
 @dataclass
 class Meal:
-    """A class representing a meal.
+    """
+    A class representing a meal.
 
     Attributes:
         id (int): The unique identifier for the meal.
@@ -41,7 +42,8 @@ class Meal:
 
 
 def create_meal(meal: str, cuisine: str, price: float, difficulty: str) -> None:
-    """Adds a new meal to the database.
+    """
+    Adds a new meal to the database.
 
     Args:
         meal (str): The name of the meal.
@@ -81,7 +83,8 @@ def create_meal(meal: str, cuisine: str, price: float, difficulty: str) -> None:
         raise e
 
 def clear_meals() -> None:
-    """Recreates the meals table, effectively deleting all meals.
+    """
+    Recreates the meals table, effectively deleting all meals.
 
     Raises:
         sqlite3.Error: If any database error occurs.
@@ -102,7 +105,8 @@ def clear_meals() -> None:
         raise e
 
 def delete_meal(meal_id: int) -> None:
-    """Marks a meal as deleted by updating its `deleted` status in the database.
+    """
+    Marks a meal as deleted by updating its `deleted` status in the database.
 
     Args:
         meal_id (int): The ID of the meal to delete.
@@ -136,7 +140,8 @@ def delete_meal(meal_id: int) -> None:
         raise e
 
 def get_leaderboard(sort_by: str="wins") -> dict[str, Any]:
-    """Retrieves the leaderboard of meals sorted by either wins or win percentage.
+    """
+    Retrieves the leaderboard of meals sorted by either wins or win percentage.
 
     Args:
         sort_by (str): The field to sort by, either 'wins' or 'win_pct'. Defaults to 'wins'.
@@ -147,6 +152,7 @@ def get_leaderboard(sort_by: str="wins") -> dict[str, Any]:
     Raises:
         ValueError: If an invalid sort field is provided.
         sqlite3.Error: If there is a database-related error.
+
     """
     query = """
         SELECT id, meal, cuisine, price, difficulty, battles, wins, (wins * 1.0 / battles) AS win_pct
@@ -189,7 +195,8 @@ def get_leaderboard(sort_by: str="wins") -> dict[str, Any]:
         raise e
 
 def get_meal_by_id(meal_id: int) -> Meal:
-    """Retrieves a meal by its ID.
+    """
+    Retrieves a meal by its ID.
 
     Args:
         meal_id (int): The ID of the meal to retrieve.
@@ -224,7 +231,8 @@ def get_meal_by_id(meal_id: int) -> Meal:
 
 
 def get_meal_by_name(meal_name: str) -> Meal:
-    """Retrieves a meal by its name.
+    """
+    Retrieves a meal by its name.
 
     Args:
         meal_name (str): The name of the meal to retrieve.
@@ -259,7 +267,8 @@ def get_meal_by_name(meal_name: str) -> Meal:
 
 
 def update_meal_stats(meal_id: int, result: str) -> None:
-    """Updates the meal statistics based on the outcome of a battle.
+    """
+    Updates the meal statistics based on the outcome of a battle.
 
     Args:
         meal_id (int): The ID of the meal to update.

@@ -11,23 +11,22 @@ configure_logger(logger)
 
 
 class BattleModel:
-    """A class representing a meal battle.
+    """
+    A class representing a meal battle.
 
     Attributes:
-        combatatants (List[Meal]): A list containing meals that represent combatants
+        combatants (List[Meal]): A list containing meals that represent combatants
 
     """
 
     def __init__(self):
-        """
+        """Initialize combatants list."""
 
-        Initialize combatants list.
-
-        """
         self.combatants: List[Meal] = []
 
     def battle(self) -> str:
-        """Simulates a battle between two combatants and removes loser from combatant list.
+        """
+        Simulates a battle between two combatants and removes loser from combatant list.
 
         Returns: 
             str: the name of the winning meal
@@ -100,6 +99,10 @@ class BattleModel:
 
         Args:
             combatant (Meal): The meal we want the associated battle score of.
+
+        Returns:
+            float: Corresponding battlescore of meal associated with `combatant`
+
         """
         difficulty_modifier = {"HIGH": 1, "MED": 2, "LOW": 3}
 
@@ -116,7 +119,8 @@ class BattleModel:
         return score
 
     def get_combatants(self) -> List[Meal]:
-        """Retrieves combatatants list 
+        """
+        Retrieves combatatants list 
 
         Returns:
             List[Meal]: a list of combatants
@@ -126,6 +130,13 @@ class BattleModel:
         return self.combatants
 
     def prep_combatant(self, combatant_data: Meal):
+        """
+        Prepares combatants for battle by adding them to combatant list
+
+        Args:
+            combatant_data (Meal): Meal data associated with combatant
+
+        """
         if len(self.combatants) >= 2:
             logger.error("Attempted to add combatant '%s' but combatants list is full", combatant_data.meal)
             raise ValueError("Combatant list is full, cannot add more combatants.")

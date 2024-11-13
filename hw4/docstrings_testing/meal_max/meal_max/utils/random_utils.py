@@ -8,7 +8,8 @@ configure_logger(logger)
 
 
 def get_random() -> float:
-    """Fetches a random float between 0 and 1 from random.org.
+    """
+    Fetches a random float between 0 and 1 from random.org.
 
     Returns:
         float: The random number fetched from random.org with up to two decimal places.
